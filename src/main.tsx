@@ -24,8 +24,14 @@ const router = createBrowserRouter([
 	},
 ]);
 
-createRoot(document.getElementById("root")).render(
-	<Provider store={store}>
-		<RouterProvider router={router} />
-	</Provider>,
-);
+const rootElement = document.getElementById("root");
+
+if (rootElement) {
+	createRoot(rootElement).render(
+		<Provider store={store}>
+			<RouterProvider router={router} />
+		</Provider>,
+	);
+} else {
+	console.error("Element with ID 'root' not found.");
+}
