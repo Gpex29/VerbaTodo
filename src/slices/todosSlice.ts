@@ -1,14 +1,16 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
 import type { Todo } from '../helpers/todoInterface';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { active, basket, completed } from '../helpers/constants';
+import { active, all, basket, completed } from '../helpers/constants';
 
 interface TodoState {
-  todos: Todo[];
+  todos: Todo[],
+  status: string
 }
 
 const initialState: TodoState = {
   todos: JSON.parse(sessionStorage.getItem('todos') || '[]'),
+  status: all
 };
 
 const saveTodosToSessionStorage = (todos: Todo[]) => {
@@ -77,10 +79,18 @@ const todoSlice = createSlice({
       prepare() {
         return { payload: null };
       }
+    },
+    switchStatus: {
+      reducer(state, action: { payload: string }) {
+        state.status = action.payload;
+      },
+      prepare(status: string) {
+        return { payload: status };
+      }
     }
   }
 });
 
-export const { addTodo, toggleTodo, removeTodoToBasket, deleteTodo, deleteAllTodosFromBasket } = todoSlice.actions;
+export const { addTodo, toggleTodo, removeTodoToBasket, deleteTodo, deleteAllTodosFromBasket, switchStatus } = todoSlice.actions;
 
 export default todoSlice.reducer;

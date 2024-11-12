@@ -1,23 +1,24 @@
 import { createRoot } from "react-dom/client";
 import "./main.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Layout } from "./components/Layout.tsx";
+import { Layout } from "./components/Layouts/Layout.tsx";
 import App from "./App.tsx";
-import { AuthPage } from "./components/AuthPage.tsx";
+import { AuthPage } from "./components/Pages/AuthPage.tsx";
 import store from "./slices/index.js";
 import { Provider } from "react-redux";
+import { routes } from './helpers/constants.ts';
 
 const router = createBrowserRouter([
 	{
-		path: "/",
+		path: routes.main,
 		element: <Layout />,
 		children: [
 			{
-				path: "authentication",
+				path: routes.auth,
 				element: <AuthPage />,
 			},
 			{
-				path: "/",
+				path: routes.main,
 				element: <App />,
 			},
 		],
