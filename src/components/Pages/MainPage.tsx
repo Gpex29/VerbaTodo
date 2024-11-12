@@ -19,7 +19,7 @@ export const Main: React.FC = () => {
 
 	return (
 		<div className="bg-stone-400 rounded-2xl p-7">
-			<div className="flex justify-center items-baseline sticky space-x-1 md:space-x-3 gap-1 sm:gap-10 text-gray-500">
+			<div className="flex items-baseline place-content-evenly text-gray-500">
 				{menuButtonsArray.map((btn) => (
 					<MenuButton
 						key={btn.text}
